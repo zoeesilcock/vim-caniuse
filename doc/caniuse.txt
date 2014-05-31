@@ -42,7 +42,7 @@ You can disable the built in mapping by adding this to your .vimrc:
 <
 If you want to setup your own key mappings use the following:
 <Plug>Ncaniuse          For normal mode.
-<Plug>VCaniuse          For visual mode.
+<Plug>Vcaniuse          For visual mode.
 
 For example:
 >

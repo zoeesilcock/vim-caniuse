@@ -33,7 +33,7 @@ If you want to setup your own key mappings use the following:
 Mapping        | Description
 ---------------|-------------------------------------------------
 <Plug>Ncaniuse | For normal mode (uses the word under the cursor)
-<Plug>VCaniuse | For visual mode (uses the selection)
+<Plug>Vcaniuse | For visual mode (uses the selection)
 
 For example:
 ```
