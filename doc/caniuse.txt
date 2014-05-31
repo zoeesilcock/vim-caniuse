@@ -1,0 +1,6 @@
+*caniuse.txt* Plugin for quickly searching caniuse.com
+
+Author: Zoee Silcock <http://zoeetrope.com>
+
+INTRODUCTION                                    *caniuse*
+
