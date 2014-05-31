@@ -1,6 +1,55 @@
-*caniuse.txt* Plugin for quickly searching caniuse.com
+*caniuse.txt*  Plugin for quickly searching caniuse.com
 
 Author: Zoee Silcock <http://zoeetrope.com>
+Repo: <https://github.com/zoeesilcock/vim-caniuse>
 
-INTRODUCTION                                    *caniuse*
+===============================================================================
+vim-caniuse                                        *caniuse*
 
+CONTENTS
+
+1. Introduction                                    |caniuse-intro|
+2. Usage                                           |caniuse-usage|
+3. Mappings                                        |caniuse-mappings|
+
+===============================================================================
+
+1. Introduction                                    *caniuse-intro*
+
+This plugin allows you to perform searches on caniuse.com directly from vim.
+
+===============================================================================
+2. Usage                                           *caniuse-usage*
+
+You can trigger a search from normal mode in which case it will pick the word
+under the cursor or you can trigger it from visual mode which will search for
+the selection.
+
+The built in mapping is:
+
+  <leader>ciu
+
+You can also use command mode:
+>
+  :Caniuse border-radius
+<
+===============================================================================
+3. Mappings                                        *caniuse-mappings*
+
+You can disable the built in mapping by adding this to your .vimrc:
+>
+  let g:caniuse_no_mappings = 1
+<
+If you want to setup your own key mappings use the following:
+<Plug>Ncaniuse          For normal mode.
+<Plug>VCaniuse          For visual mode.
+
+For example:
+>
+  :nmap <leader>foo <Plug>Ncaniuse
+  :vmap <leader>foo <Plug>Vcaniuse
+<
+
+Note: Using |:noremap| will not work with <Plug> mappings.
+
+===============================================================================
