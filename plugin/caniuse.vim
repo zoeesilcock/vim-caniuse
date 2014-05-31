@@ -44,6 +44,6 @@ nnoremap <silent> <Plug>Ncaniuse :<C-U>call <SID>caniuse_word()<CR>
 vnoremap <silent> <Plug>Vcaniuse :<C-U>call <SID>caniuse_selection()<CR>
 
 if !exists("g:caniuse_no_mappings") || ! g:caniuse_no_mappings
-  nnoremap <leader>ciu <Plug>Ncaniuse
-  vnoremap <leader>ciu <Plug>Vcaniuse
+  nmap <leader>ciu <Plug>Ncaniuse
+  vmap <leader>ciu <Plug>Vcaniuse
 end
