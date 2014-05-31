@@ -2,12 +2,15 @@ function! s:get_inner_word()
   let original_value = getreg('w', 1)
   let original_type = getregtype('w')
   let original_position = getpos('.')
+  let original_isk = &isk
 
+  setlocal isk+=-
   execute 'normal! "wyiw'
   let word = getreg()
 
   call setreg('w', original_value, original_type)
   call setpos('.', original_position)
+  let &l:isk = original_isk
 
   return word
 endfunction
