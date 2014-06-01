@@ -30,10 +30,10 @@ let g:caniuse_no_mappings = 1
 
 If you want to setup your own key mappings use the following:
 
-Mapping        | Description
----------------|-------------------------------------------------
-<Plug>Ncaniuse | For normal mode (uses the word under the cursor)
-<Plug>Vcaniuse | For visual mode (uses the selection)
+Mapping              | Description
+---------------------|-------------------------------------------------
+```<Plug>Ncaniuse``` | For normal mode (uses the word under the cursor)
+```<Plug>Vcaniuse``` | For visual mode (uses the selection)
 
 For example:
 ```
