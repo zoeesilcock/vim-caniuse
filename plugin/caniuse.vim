@@ -26,8 +26,30 @@ function! s:get_visual_selection()
   return join(lines, "\n")
 endfunction
 
+function! s:get_browser_command()
+  if exists("g:caniuse_browser_command")
+    let open_command = g:caniuse_browser_command
+  elseif has('win32') || has('win16')
+    let open_command = 'start'
+  else
+    let os = substitute(system('uname'), "\n", "", "")
+
+    if os == 'Darwin' || os == 'Mac'
+      let open_command = 'open'
+    elseif os =~ 'CYGWIN'
+      let open_command = 'cygstart'
+    elseif os == 'SunOS'
+      let open_command = 'sdtwebclient'
+    else
+      let open_command = 'xdg-open'
+    endif
+  endif
+
+  return open_command
+endfunction
+
 function! s:open_in_browser(url)
-  call system('open ' . a:url)
+  call system(s:get_browser_command() . ' ' . a:url)
 endfunction
 
 function! s:caniuse(search)
@@ -39,7 +61,7 @@ function! s:caniuse_word()
 endfunction
 
 function! s:caniuse_selection()
-  call s:caniuse(s:get_inner_selection())
+  call s:caniuse(s:get_visual_selection())
 endfunction
 
 command! -nargs=1 Caniuse call s:caniuse(<f-args>)

@@ -21,7 +21,7 @@ You can also use command mode:
 ```
 
 Mappings
---------------
+--------
 
 You can disable this mapping by setting adding this to your .vimrc:
 ```
@@ -42,3 +42,20 @@ For example:
 ```
 
 Note: Using :noremap will not work with <Plug> mappings.
+
+Requirements
+------------
+
+The plugin should work out of the box on most systems, but opening a URL in
+your web browser requires an external program. The plugin will do it's
+best to find the built in command on your system. On Linux it assumes that you
+have xdg-open which is installed by default on most distributions (it's part of
+the xdg-utils package in case you happen to not have it).
+
+If the plugin fails to find the right command or you want to use another
+one you can specify the command in your .vimrc file:
+```
+  let g:caniuse_browser_command = 'open'
+```
+
+The command you put here will be called with the URL as a parameter.
