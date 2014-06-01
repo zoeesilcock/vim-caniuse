@@ -1,3 +1,10 @@
+function! s:caniuse(search)
+  call s:open_in_browser("http://caniuse.com/\\#search=" . a:search)
+endfunction
+
+command! -nargs=1 Caniuse call s:caniuse(<f-args>)
+
+" Search term getters {{{
 function! s:get_inner_word()
   let original_value = getreg('w', 1)
   let original_type = getregtype('w')
@@ -25,7 +32,9 @@ function! s:get_visual_selection()
   let lines[0] = lines[0][col1 - 1:]
   return join(lines, "\n")
 endfunction
+" }}}
 
+" Browser methods {{{
 function! s:get_browser_command()
   if exists("g:caniuse_browser_command")
     let open_command = g:caniuse_browser_command
@@ -51,11 +60,9 @@ endfunction
 function! s:open_in_browser(url)
   call system(s:get_browser_command() . ' ' . a:url)
 endfunction
+" }}}
 
-function! s:caniuse(search)
-  call s:open_in_browser("http://caniuse.com/\\#search=" . a:search)
-endfunction
-
+" Mappings {{{
 function! s:caniuse_word()
   call s:caniuse(s:get_inner_word())
 endfunction
@@ -64,8 +71,6 @@ function! s:caniuse_selection()
   call s:caniuse(s:get_visual_selection())
 endfunction
 
-command! -nargs=1 Caniuse call s:caniuse(<f-args>)
-
 nnoremap <silent> <Plug>Ncaniuse :<C-U>call <SID>caniuse_word()<CR>
 vnoremap <silent> <Plug>Vcaniuse :<C-U>call <SID>caniuse_selection()<CR>
 
@@ -73,3 +78,4 @@ if !exists("g:caniuse_no_mappings") || ! g:caniuse_no_mappings
   nmap <leader>ciu <Plug>Ncaniuse
   vmap <leader>ciu <Plug>Vcaniuse
 end
+" }}}
