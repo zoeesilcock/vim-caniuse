@@ -1,10 +1,14 @@
-function! s:caniuse(search)
-  call s:open_in_browser("http://caniuse.com/\\#search=" . a:search)
+function! s:caniuse(input)
+  let search_term = s:extract_search_term(a:input)
+
+  if s:valid_search(search_term)
+    call s:open_in_browser("http://caniuse.com/\\#search=" . search_term)
+  end
 endfunction
 
 command! -nargs=1 Caniuse call s:caniuse(<f-args>)
 
-" Search term getters {{{
+" Input {{{
 function! s:get_inner_word()
   let original_value = getreg('w', 1)
   let original_type = getregtype('w')
@@ -31,6 +35,36 @@ function! s:get_visual_selection()
   let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
   let lines[0] = lines[0][col1 - 1:]
   return join(lines, "\n")
+endfunction
+" }}}
+
+" Validation {{{
+function! s:extract_search_term(input)
+  let search_term = a:input
+  let css = matchlist(a:input, '\s*\(.\+\):.\+;')
+  let html = matchlist(a:input, '<\/*\([A-z]*\)>')
+
+  if len(css) > 0
+    let search_term = css[1]
+  elseif len(html) > 0
+    let search_term = html[1]
+  end
+
+  return search_term
+endfunction
+
+function! s:valid_search(search)
+  let unsuported_characters = match(a:search, '\n\|\s\|=\|?\|<\|>')
+
+  if unsuported_characters != -1
+    echoerr 'Unsuported characters received.'
+    return 0
+  elseif len(a:search) == 0
+    echoerr 'No characters received.'
+    return 0
+  end
+
+  return 1
 endfunction
 " }}}
 
